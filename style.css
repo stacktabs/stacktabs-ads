@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  background: #0f172a;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+.container {
+  max-width: 420px;
+  margin: 60px auto;
+  text-align: center;
+  padding: 20px;
+}
+
+#ad-container {
+  background: #111827;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading {
+  opacity: 0.7;
+}
+
+#timer {
+  margin-top: 10px;
+  font-size: 14px;
+}
