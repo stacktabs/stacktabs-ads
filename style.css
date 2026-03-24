@@ -31,3 +31,64 @@ body {
   margin-top: 10px;
   font-size: 14px;
 }
+
+/* 🔥 FIX BANNERS */
+.banner {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+/* 🔥 FIX AD CONTAINER */
+#ad-container {
+  background: #111827;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px 0;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 🔥 LIMIT NATIVE AD SIZE */
+#container-a9904dbe1fd45dcf39bde5cf838c466e {
+  max-width: 100%;
+}
+
+/* 🔥 TIMER BOX */
+.reward-box {
+  margin-top: 15px;
+}
+
+/* BIG TIMER */
+#timerDisplay {
+  font-size: 28px;
+  font-weight: bold;
+  color: #4ade80;
+  margin-bottom: 5px;
+}
+
+/* STATUS TEXT */
+#status {
+  font-size: 14px;
+  color: #cbd5f5;
+}
+
+/* WHEN COMPLETED */
+.completed {
+  color: #22c55e !important;
+  font-weight: bold;
+}
+
+/* CLOSE BUTTON IMPROVE */
+#closeBtn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #0a66ff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
