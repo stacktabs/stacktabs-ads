@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let timer = null;
   let completed = false;
 
-  closeBtn.style.display = "none";
+  if (closeBtn) closeBtn.style.display = "none";
   status.textContent = "Watch 30 seconds to unlock";
 
   // ===============================
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (timerDisplay) timerDisplay.textContent = "✔";
 
-    closeBtn.style.display = "block";
+    if (closeBtn) closeBtn.style.display = "block";
 
     window.postMessage({
       source: "stacktabs-ad",
