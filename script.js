@@ -16,6 +16,7 @@ if (!token) {
 // ===== DOM =====
 const status = document.getElementById("status");
 const closeBtn = document.getElementById("closeBtn");
+const timerDisplay = document.getElementById("timerDisplay");
 
 // ===== STATE =====
 let remainingSeconds = 30;
@@ -36,6 +37,7 @@ function startTimer() {
     remainingSeconds--;
 
     status.textContent = `Please watch ${remainingSeconds}s`;
+    if (timerDisplay) timerDisplay.textContent = `${remainingSeconds}s`;
 
     if (remainingSeconds <= 0) {
       completeAd();
@@ -60,6 +62,9 @@ function completeAd() {
   stopTimer();
 
   status.textContent = "Ad completed. You may close this page.";
+  status.classList.add("completed");
+  
+  if (timerDisplay) timerDisplay.textContent = "✔";
   closeBtn.style.display = "block";
 
   // Broadcast to ALL extension pages
