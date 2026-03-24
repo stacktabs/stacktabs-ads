@@ -1,24 +1,19 @@
 // ===============================
 // STACKTABS REWARDED AD SCRIPT
 // ===============================
+
 // ===============================
 // ADSTERRA POPUNDER (REWARDED)
 // ===============================
-
 window.addEventListener("load", () => {
-
-  // delay improves CPM + avoids instant trigger
   setTimeout(() => {
-
     const s = document.createElement("script");
     s.src = "https://pl28972613.profitablecpmratenetwork.com/98/1b/0e/981b0e6a4364d3bdd66e35a5267c32be.js";
     s.async = true;
-
     document.body.appendChild(s);
-
   }, 1500);
-
 });
+
 // ===== EXTENSION ID =====
 const EXTENSION_ID = "odajcbggmlnpoejgaljeabfkfgppidia";
 
@@ -34,14 +29,19 @@ if (!token) {
 const status = document.getElementById("status");
 const closeBtn = document.getElementById("closeBtn");
 
+// NEW UI ELEMENTS (make sure these exist in HTML)
+const timerText = document.getElementById("timerText");
+const progress = document.getElementById("progress");
+
 // ===== STATE =====
-let remainingSeconds = 30;
+let total = 30;
+let remainingSeconds = total;
 let timer = null;
 let completed = false;
 
-// hide close button initially
-closeBtn.style.display = "none";
-status.textContent = "Watch 30 seconds to unlock";
+// INITIAL UI
+closeBtn.classList.add("hidden");
+status.textContent = "Watch the ad to unlock";
 
 // ===============================
 // TIMER CONTROL
@@ -51,6 +51,17 @@ function startTimer() {
 
   timer = setInterval(() => {
     remainingSeconds--;
+
+    // update countdown
+    if (timerText) {
+      timerText.textContent = remainingSeconds;
+    }
+
+    // update progress bar
+    if (progress) {
+      progress.style.width =
+        ((total - remainingSeconds) / total) * 100 + "%";
+    }
 
     status.textContent = `Please watch ${remainingSeconds}s`;
 
@@ -76,22 +87,31 @@ function completeAd() {
   completed = true;
   stopTimer();
 
-  status.textContent = "Ad completed. You may close this page.";
-  closeBtn.style.display = "block";
+  status.textContent = "✅ Ad completed! You can now close.";
 
-  // Broadcast to ALL extension pages
-  window.postMessage({
-    source: "stacktabs-ad",
-    action: "REWARDED_AD_COMPLETE",
-    token: token
-  }, "*");
+  // update timer UI
+  if (timerText) {
+    timerText.textContent = "✔";
+  }
+
+  // show close button with animation
+  closeBtn.classList.remove("hidden");
+  closeBtn.classList.add("show");
+
+  // notify extension
+  window.postMessage(
+    {
+      source: "stacktabs-ad",
+      action: "REWARDED_AD_COMPLETE",
+      token: token
+    },
+    "*"
+  );
 }
-
 
 // ===============================
 // VISIBILITY HANDLING
 // ===============================
-// Pause timer when user switches tabs / minimizes / changes window
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) {
     stopTimer();
@@ -101,7 +121,7 @@ document.addEventListener("visibilitychange", () => {
 });
 
 // ===============================
-// START INITIAL TIMER
+// START TIMER
 // ===============================
 startTimer();
 
@@ -110,13 +130,16 @@ startTimer();
 // ===============================
 closeBtn.onclick = () => {
   if (window.opener) {
-    window.opener.postMessage({
-      source: "stacktabs-ad",
-      action: "AD_CLOSED"
-    }, "*");
+    window.opener.postMessage(
+      {
+        source: "stacktabs-ad",
+        action: "AD_CLOSED"
+      },
+      "*"
+    );
   }
-  window.close();
 
+  window.close();
 
   setTimeout(() => window.close(), 300);
 };
