@@ -96,14 +96,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // CLOSE BUTTON
   // ===============================
   closeBtn.onclick = () => {
+
+    // notify extension FIRST (CRITICAL)
     if (window.opener) {
       window.opener.postMessage({
         source: "stacktabs-ad",
         action: "AD_CLOSED"
       }, "*");
     }
+  
+    // try to close
     window.close();
-    setTimeout(() => window.close(), 300);
+  
+    // fallback (if browser blocks close)
+    setTimeout(() => {
+      window.location.href = "about:blank";
+    }, 200);
+  
   };
 
 });
