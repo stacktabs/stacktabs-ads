@@ -2,109 +2,108 @@
 // STACKTABS REWARDED AD SCRIPT
 // ===============================
 
-// ===== EXTENSION ID =====
-const EXTENSION_ID = "odajcbggmlnpoejgaljeabfkfgppidia";
+document.addEventListener("DOMContentLoaded", () => {
 
-// ===== READ TOKEN =====
-const params = new URLSearchParams(location.search);
-const token = params.get("token");
+  // ===== EXTENSION ID =====
+  const EXTENSION_ID = "odajcbggmlnpoejgaljeabfkfgppidia";
 
-if (!token) {
-  console.error("Missing ad token");
-}
+  // ===== READ TOKEN =====
+  const params = new URLSearchParams(location.search);
+  const token = params.get("token");
 
-// ===== DOM =====
-const status = document.getElementById("status");
-const closeBtn = document.getElementById("closeBtn");
-const timerDisplay = document.getElementById("timerDisplay");
+  if (!token) {
+    console.error("Missing ad token");
+  }
 
-// ===== STATE =====
-let remainingSeconds = 30;
-let timer = null;
-let completed = false;
+  // ===== DOM =====
+  const status = document.getElementById("status");
+  const closeBtn = document.getElementById("closeBtn");
+  const timerDisplay = document.getElementById("timerDisplay");
 
-// hide close button initially
-closeBtn.style.display = "none";
-status.textContent = "Watch 30 seconds to unlock";
+  // ===== STATE =====
+  let remainingSeconds = 30;
+  let timer = null;
+  let completed = false;
 
-// ===============================
-// TIMER CONTROL
-// ===============================
-function startTimer() {
-  if (timer || completed) return;
+  closeBtn.style.display = "none";
+  status.textContent = "Watch 30 seconds to unlock";
 
-  timer = setInterval(() => {
-    remainingSeconds--;
+  // ===============================
+  // TIMER CONTROL
+  // ===============================
+  function startTimer() {
+    if (timer || completed) return;
 
-    status.textContent = `Please watch ${remainingSeconds}s`;
-    if (timerDisplay) timerDisplay.textContent = `${remainingSeconds}s`;
+    timer = setInterval(() => {
+      remainingSeconds--;
 
-    if (remainingSeconds <= 0) {
-      completeAd();
+      status.textContent = `Please watch ${remainingSeconds}s`;
+      if (timerDisplay) timerDisplay.textContent = `${remainingSeconds}s`;
+
+      if (remainingSeconds <= 0) {
+        completeAd();
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
     }
-  }, 1000);
-}
-
-function stopTimer() {
-  if (timer) {
-    clearInterval(timer);
-    timer = null;
   }
-}
 
-// ===============================
-// COMPLETE AD
-// ===============================
-function completeAd() {
-  if (completed) return;
+  // ===============================
+  // COMPLETE AD
+  // ===============================
+  function completeAd() {
+    if (completed) return;
 
-  completed = true;
-  stopTimer();
-
-  status.textContent = "Ad completed. You may close this page.";
-  status.classList.add("completed");
-  
-  if (timerDisplay) timerDisplay.textContent = "✔";
-  closeBtn.style.display = "block";
-
-  // Broadcast to ALL extension pages
-  window.postMessage({
-    source: "stacktabs-ad",
-    action: "REWARDED_AD_COMPLETE",
-    token: token
-  }, "*");
-}
-
-
-// ===============================
-// VISIBILITY HANDLING
-// ===============================
-// Pause timer when user switches tabs / minimizes / changes window
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
+    completed = true;
     stopTimer();
-  } else {
-    startTimer();
-  }
-});
 
-// ===============================
-// START INITIAL TIMER
-// ===============================
-startTimer();
+    status.textContent = "Ad completed. You may close this page.";
+    status.classList.add("completed");
 
-// ===============================
-// CLOSE BUTTON
-// ===============================
-closeBtn.onclick = () => {
-  if (window.opener) {
-    window.opener.postMessage({
+    if (timerDisplay) timerDisplay.textContent = "✔";
+
+    closeBtn.style.display = "block";
+
+    window.postMessage({
       source: "stacktabs-ad",
-      action: "AD_CLOSED"
+      action: "REWARDED_AD_COMPLETE",
+      token: token
     }, "*");
   }
-  window.close();
 
+  // ===============================
+  // VISIBILITY HANDLING
+  // ===============================
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopTimer();
+    } else {
+      startTimer();
+    }
+  });
 
-  setTimeout(() => window.close(), 300);
-};
+  // ===============================
+  // START TIMER
+  // ===============================
+  startTimer();
+
+  // ===============================
+  // CLOSE BUTTON
+  // ===============================
+  closeBtn.onclick = () => {
+    if (window.opener) {
+      window.opener.postMessage({
+        source: "stacktabs-ad",
+        action: "AD_CLOSED"
+      }, "*");
+    }
+    window.close();
+    setTimeout(() => window.close(), 300);
+  };
+
+});
