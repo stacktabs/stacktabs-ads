@@ -1,3 +1,4 @@
+/* FIX LAYOUT */
 body {
   margin: 0;
   background: #0f172a;
@@ -5,36 +6,57 @@ body {
   color: #fff;
 }
 
-.container {
-  max-width: 420px;
-  margin: 60px auto;
-  text-align: center;
-  padding: 20px;
+/* banners */
+.banner {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
 }
 
-#ad-container {
-  background: #111827;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px 0;
-  min-height: 250px;
+/* center container */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* 🎥 FAKE VIDEO BOX */
+.video-box {
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px auto;
+  max-width: 640px;
+}
+
+/* label like YouTube */
+.video-label {
+  font-size: 12px;
+  padding: 6px;
+  background: #111;
+  text-align: left;
+}
+
+/* ad container */
+.video-ad {
+  height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.loading {
-  opacity: 0.7;
+/* FORCE ad to stay inside */
+#container-a9904dbe1fd45dcf39bde5cf838c466e {
+  max-width: 100%;
 }
 
-#timer {
-  margin-top: 10px;
-  font-size: 14px;
-}
-.banner {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  background: #020617;
+/* button */
+#closeBtn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #0a66ff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
 }
