@@ -1,7 +1,24 @@
 // ===============================
 // STACKTABS REWARDED AD SCRIPT
 // ===============================
+// ===============================
+// ADSTERRA POPUNDER (REWARDED)
+// ===============================
 
+window.addEventListener("load", () => {
+
+  // delay improves CPM + avoids instant trigger
+  setTimeout(() => {
+
+    const s = document.createElement("script");
+    s.src = "https://pl28972613.profitablecpmratenetwork.com/98/1b/0e/981b0e6a4364d3bdd66e35a5267c32be.js";
+    s.async = true;
+
+    document.body.appendChild(s);
+
+  }, 1500);
+
+});
 // ===== EXTENSION ID =====
 const EXTENSION_ID = "odajcbggmlnpoejgaljeabfkfgppidia";
 
