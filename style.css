@@ -7,10 +7,10 @@ body {
 
 .container {
   max-width: 420px;
-  margin: 60px auto;
+  margin: 0;              
   text-align: center;
   padding: 20px;
-  width:100%;
+  width: 100%;
 }
 
 #ad-container {
@@ -46,10 +46,17 @@ body {
   align-items: flex-start;
   gap: 20px; /* space between ads */
   padding: 20px;
+  max-width: 900px;   /* 🔥 important */
+  margin: 0 auto;
+}
+.banner-left iframe {
+  display: block;
 }
 .banner-left {
   width: 160px;
   flex-shrink: 0;
+  display: flex;
+  justify-content: center;
 }
 /* 🔥 FIX AD CONTAINER */
 #ad-container {
