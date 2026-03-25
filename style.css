@@ -65,7 +65,7 @@ body {
   width: 160px;
   flex-shrink: 0;
   display: flex;
-  justify-content:right;
+  aligh-items:right;
   
 }
 /* 🔥 FIX AD CONTAINER */
