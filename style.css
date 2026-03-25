@@ -10,6 +10,7 @@ body {
   margin: 60px auto;
   text-align: center;
   padding: 20px;
+  width:100%;
 }
 
 #ad-container {
@@ -38,11 +39,18 @@ body {
   justify-content: center;
   padding: 10px 0;
 }
-.banner-left{
-  display:flex;
-  justify-content:left;
-}
 
+.main-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px; /* space between ads */
+  padding: 20px;
+}
+.banner-left {
+  width: 160px;
+  flex-shrink: 0;
+}
 /* 🔥 FIX AD CONTAINER */
 #ad-container {
   background: #111827;
