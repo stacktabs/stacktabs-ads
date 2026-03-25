@@ -42,7 +42,7 @@ body {
 
 .main-layout {
   display: flex;
-  justify-content: center;
+  
   align-items: flex-start;
   gap: 20px; /* space between ads */
   padding: 20px;
