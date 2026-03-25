@@ -56,7 +56,7 @@ body {
   width: 160px;
   flex-shrink: 0;
   display: flex;
-  
+  justify-content: center;
 }
 /* 🔥 FIX AD CONTAINER */
 #ad-container {
