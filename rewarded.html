@@ -7,48 +7,53 @@
 
   <!-- 🔥 SOCIAL BAR (loads globally) -->
   <script src="https://pl28972653.profitablecpmratenetwork.com/51/9d/df/519ddfa48ea484584ff52caa04d9c27f.js"></script>
-
 </head>
+
 <body>
+
+  <!-- TOP BANNER -->
   <div class="banner">
     <script>
       atOptions = {
-       'key' : 'f76cfd09f73da76d142d20679a03bd00',
-       'format' : 'iframe',
-       'height' : 60,
-       'width' : 468,
-       'params' : {}
+        'key': 'f76cfd09f73da76d142d20679a03bd00',
+        'format': 'iframe',
+        'height': 60,
+        'width': 468,
+        'params': {}
       };
     </script>
     <script src="https://www.highperformanceformat.com/f76cfd09f73da76d142d20679a03bd00/invoke.js"></script>
   </div>
+
   <div class="main-layout">
+
+    <!-- LEFT BANNER -->
     <div class="banner-left">
       <script>
         atOptions = {
-          'key' : '7515bdf193a6e512b564e86a8c8a16f5',
-          'format' : 'iframe',
-          'height' : 600,
-          'width' : 160,
-          'params' : {}
+          'key': '7515bdf193a6e512b564e86a8c8a16f5',
+          'format': 'iframe',
+          'height': 600,
+          'width': 160,
+          'params': {}
         };
       </script>
       <script src="https://www.highperformanceformat.com/7515bdf193a6e512b564e86a8c8a16f5/invoke.js"></script>
     </div>
+
+    <!-- MAIN CONTENT -->
     <div class="container">
       <h2>Watch a short ad to continue</h2>
-  
+
       <!-- 🎯 CENTER (NATIVE BANNER) -->
       <div id="ad-container">
         <div id="container-a9904dbe1fd45dcf39bde5cf838c466e"></div>
-        <script async="async" data-cfasync="false"
+        <script async data-cfasync="false"
           src="https://pl28972628.profitablecpmratenetwork.com/a9904dbe1fd45dcf39bde5cf838c466e/invoke.js">
         </script>
-        
-  
       </div>
-      
-  
+
+      <!-- TIMER BOX -->
       <div class="reward-box">
         <div id="timerDisplay">30s</div>
         <p id="status">Watch 30 seconds to unlock</p>
@@ -56,19 +61,59 @@
       </div>
     </div>
   </div>
-  <div class ="banner">
+
+  <!-- BOTTOM BANNER -->
+  <div class="banner">
     <script>
       atOptions = {
-        'key' : '527fdf600a94c070dfa93cd90572fc4d',
-        'format' : 'iframe',
-        'height' : 90,
-        'width' : 728,
-        'params' : {}
+        'key': '527fdf600a94c070dfa93cd90572fc4d',
+        'format': 'iframe',
+        'height': 90,
+        'width': 728,
+        'params': {}
       };
     </script>
     <script src="https://www.highperformanceformat.com/527fdf600a94c070dfa93cd90572fc4d/invoke.js"></script>
   </div>
 
+  <!-- 🔥 VIDEO INTERSTITIAL AD -->
+  <script>
+    let adPlayed = false;
+
+    function loadVideoAd() {
+      var s = document.createElement("script");
+      s.src = "https://YOUR_RICHADS_SCRIPT.js"; // 🔴 REPLACE THIS
+      s.async = true;
+      document.body.appendChild(s);
+    }
+
+    function triggerVideoAd() {
+      if (adPlayed) return;
+      adPlayed = true;
+
+      if (window.showAd) {
+        window.showAd();
+      } else if (window.showInterstitial) {
+        window.showInterstitial();
+      } else {
+        console.log("Ad not ready yet");
+      }
+    }
+
+    window.addEventListener("load", () => {
+      // load script
+      setTimeout(() => {
+        loadVideoAd();
+      }, 500);
+
+      // trigger ad popup
+      setTimeout(() => {
+        triggerVideoAd();
+      }, 1500);
+    });
+  </script>
+
+  <!-- YOUR LOGIC -->
   <script src="script.js"></script>
 
 </body>
