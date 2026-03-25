@@ -56,8 +56,8 @@
 
       <!-- TIMER BOX -->
       <div class="reward-box">
-        <div id="timerDisplay">30s</div>
-        <p id="status">Watch 30 seconds to unlock</p>
+        <div id="timerDisplay">5s</div>
+        <p id="status">Watch 5 seconds to unlock</p>
         <button id="closeBtn" style="display:none;">Close Ad</button>
       </div>
     </div>
@@ -77,42 +77,7 @@
     <script src="https://www.highperformanceformat.com/527fdf600a94c070dfa93cd90572fc4d/invoke.js"></script>
   </div>
 
-  <!-- 🔥 VIDEO INTERSTITIAL AD -->
-  <script>
-    let adPlayed = false;
-
-    function loadVideoAd() {
-      var s = document.createElement("script");
-      s.src = "https://richinfo.co/richpartners/pops/js/richads-pu-ob.js"; // 🔴 REPLACE THIS
-      s.async = true;
-      document.body.appendChild(s);
-    }
-
-    function triggerVideoAd() {
-      if (adPlayed) return;
-      adPlayed = true;
-
-      if (window.showAd) {
-        window.showAd();
-      } else if (window.showInterstitial) {
-        window.showInterstitial();
-      } else {
-        console.log("Ad not ready yet");
-      }
-    }
-
-    window.addEventListener("load", () => {
-      // load script
-      setTimeout(() => {
-        loadVideoAd();
-      }, 500);
-
-      // trigger ad popup
-      setTimeout(() => {
-        triggerVideoAd();
-      }, 1500);
-    });
-  </script>
+  
 
   <!-- YOUR LOGIC -->
   <script src="script.js"></script>
