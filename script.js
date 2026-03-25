@@ -21,12 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const timerDisplay = document.getElementById("timerDisplay");
 
   // ===== STATE =====
-  let remainingSeconds = 30;
+  let remainingSeconds = 5;
   let timer = null;
   let completed = false;
 
   if (closeBtn) closeBtn.style.display = "none";
-  status.textContent = "Watch 30 seconds to unlock";
+  status.textContent = "Please wait 5 seconds...";
 
   // ===============================
   // TIMER CONTROL
@@ -87,10 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ===============================
-  // START TIMER
-  // ===============================
-  startTimer();
+  // Start timer ONLY after user returns from ad
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && !completed && !timer) {
+      startTimer();
+    }
+  });
 
   // ===============================
   // CLOSE BUTTON
