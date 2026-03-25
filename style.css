@@ -38,6 +38,10 @@ body {
   justify-content: center;
   padding: 10px 0;
 }
+.banner-left{
+  display:flex;
+  justify-content:left;
+}
 
 /* 🔥 FIX AD CONTAINER */
 #ad-container {
