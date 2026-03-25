@@ -76,24 +76,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }, "*");
   }
 
-  // ===============================
-  // VISIBILITY HANDLING
-  // ===============================
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      stopTimer();
-    } else {
+  // Detect user returning from ad (focus-based, more reliable)
+  let hasStarted = false;
+  
+  window.addEventListener("focus", () => {
+    if (!hasStarted && !completed) {
+      hasStarted = true;
       startTimer();
     }
   });
-
-  // Start timer ONLY after user returns from ad
-  document.addEventListener("visibilitychange", () => {
-    if (!document.hidden && !completed && !timer) {
+  // Fallback: start timer after 8 seconds max
+  setTimeout(() => {
+    if (!hasStarted && !completed) {
+      hasStarted = true;
       startTimer();
     }
-  });
-
+  }, 8000);
   // ===============================
   // CLOSE BUTTON
   // ===============================
