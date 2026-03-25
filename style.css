@@ -58,6 +58,15 @@ body {
   display: flex;
   
 }
+.banner-right iframe {
+  display: block;
+}
+.banner-right {
+  width: 160px;
+  flex-shrink: 0;
+  display: flex;
+  
+}
 /* 🔥 FIX AD CONTAINER */
 #ad-container {
   background: #111827;
