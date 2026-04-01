@@ -27,7 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (closeBtn) closeBtn.style.display = "none";
   status.textContent = "Please wait 5 seconds...";
+  let videoCompleted = false;
 
+  window.addEventListener("message", (event) => {
+    if (event.data?.type === "VIDEO_DONE") {
+      videoCompleted = true;
+      startTimer(); // start 5s timer ONLY now
+    }
+  });
   // ===============================
   // TIMER CONTROL
   // ===============================
