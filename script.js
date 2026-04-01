@@ -79,19 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Detect user returning from ad (focus-based, more reliable)
   let hasStarted = false;
   
-  window.addEventListener("focus", () => {
-    if (!hasStarted && !completed) {
-      hasStarted = true;
-      startTimer();
-    }
+  
   });
-  // Fallback: start timer after 8 seconds max
-  setTimeout(() => {
-    if (!hasStarted && !completed) {
-      hasStarted = true;
-      startTimer();
-    }
-  }, 8000);
+  
   // ===============================
   // CLOSE BUTTON
   // ===============================
