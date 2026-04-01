@@ -97,7 +97,7 @@
     const player = videojs('vastVideo');
   
     player.vastClient({
-      adTagUrl: "YOUR_ADPLAYER_VAST_URL", // from dashboard
+      adTagUrl: "YOUR_VAST_URL",
       playAdAlways: true
     });
   
@@ -106,10 +106,13 @@
     });
   
     player.on('ended', () => {
+      // hide overlay (popup closed)
+      document.getElementById("videoOverlay").style.display = "none";
+  
+      // trigger timer
       window.postMessage({ type: "VIDEO_DONE" }, "*");
     });
   </script>
-  <!-- YOUR LOGIC -->
   <script src="script.js"></script>
 
 </body>
