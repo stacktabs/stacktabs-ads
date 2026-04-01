@@ -32,7 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }, 1000);
   }
-
+  player.on('adserror', () => {
+    document.getElementById("videoOverlay").style.display = "none";
+    window.postMessage({ type: "VIDEO_DONE" }, "*");
+  });
   function completeAd() {
     if (completed) return;
 
