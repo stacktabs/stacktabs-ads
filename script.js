@@ -1,43 +1,23 @@
-// ===============================
-// STACKTABS REWARDED AD SCRIPT
-// ===============================
-
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ===== EXTENSION ID =====
-  const EXTENSION_ID = "odajcbggmlnpoejgaljeabfkfgppidia";
-
-  // ===== READ TOKEN =====
   const params = new URLSearchParams(location.search);
   const token = params.get("token");
 
   if (!token) {
-    console.error("Missing ad token");
+    console.warn("No token (dev mode)");
   }
 
-  // ===== DOM =====
   const status = document.getElementById("status");
   const closeBtn = document.getElementById("closeBtn");
   const timerDisplay = document.getElementById("timerDisplay");
 
-  // ===== STATE =====
   let remainingSeconds = 5;
   let timer = null;
   let completed = false;
 
-  if (closeBtn) closeBtn.style.display = "none";
+  closeBtn.style.display = "none";
   status.textContent = "Please wait 5 seconds...";
-  let videoCompleted = false;
 
-  window.addEventListener("message", (event) => {
-    if (event.data?.type === "VIDEO_DONE") {
-      videoCompleted = true;
-      startTimer(); // start 5s timer ONLY now
-    }
-  });
-  // ===============================
-  // TIMER CONTROL
-  // ===============================
   function startTimer() {
     if (timer || completed) return;
 
@@ -45,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       remainingSeconds--;
 
       status.textContent = `Please watch ${remainingSeconds}s`;
-      if (timerDisplay) timerDisplay.textContent = `${remainingSeconds}s`;
+      timerDisplay.textContent = `${remainingSeconds}s`;
 
       if (remainingSeconds <= 0) {
         completeAd();
@@ -53,28 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   }
 
-  function stopTimer() {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
-    }
-  }
-
-  // ===============================
-  // COMPLETE AD
-  // ===============================
   function completeAd() {
     if (completed) return;
 
     completed = true;
-    stopTimer();
+    clearInterval(timer);
 
     status.textContent = "Ad completed. You may close this page.";
     status.classList.add("completed");
+    timerDisplay.textContent = "✔";
 
-    if (timerDisplay) timerDisplay.textContent = "✔";
-
-    if (closeBtn) closeBtn.style.display = "block";
+    closeBtn.style.display = "block";
 
     window.postMessage({
       source: "stacktabs-ad",
@@ -83,33 +52,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }, "*");
   }
 
-  // Detect user returning from ad (focus-based, more reliable)
-  let hasStarted = false;
-  
-  
+  // 🔥 START TIMER ONLY AFTER VIDEO
+  window.addEventListener("message", (event) => {
+    if (event.data?.type === "VIDEO_DONE") {
+      startTimer();
+    }
   });
-  
-  // ===============================
-  // CLOSE BUTTON
-  // ===============================
-  closeBtn.onclick = () => {
 
-    // notify extension FIRST (CRITICAL)
+  closeBtn.onclick = () => {
     if (window.opener) {
       window.opener.postMessage({
         source: "stacktabs-ad",
         action: "AD_CLOSED"
       }, "*");
     }
-  
-    // try to close
+
     window.close();
-  
-    // fallback (if browser blocks close)
+
     setTimeout(() => {
       window.location.href = "about:blank";
     }, 200);
-  
   };
 
 });
