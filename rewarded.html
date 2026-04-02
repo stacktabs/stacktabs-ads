@@ -5,55 +5,48 @@
   <title>Watch Ad to Continue</title>
 
   <link rel="stylesheet" href="style.css" />
-  <meta name="monetag" content="c2c42704f765b26fe257363522ac4c9d">
 
-  <!-- 🔥 MULTI TAG (AUTO: pop + push + inpage) -->
-  <script src="https://quge5.com/88/tag.min.js" data-zone="225721" async data-cfasync="false"></script>
+  <!-- VIDEO.JS -->
+  <link href="https://vjs.zencdn.net/7.21.1/video-js.css" rel="stylesheet" />
+  <script src="https://vjs.zencdn.net/7.21.1/video.min.js"></script>
 
-  <!-- 🔥 EXTRA POPUNDER (STRONG MONEY) -->
-  <script>
-    (function(s){
-      s.dataset.zone='10820296';
-      s.src='https://al5sm.com/tag.min.js';
-    })(document.body.appendChild(document.createElement('script')));
-  </script>
-
-  <!-- 🔥 INPAGE PUSH -->
-  <script>
-    (function(s){
-      s.dataset.zone='10820298';
-      s.src='https://nap5k.com/tag.min.js';
-    })(document.body.appendChild(document.createElement('script')));
-  </script>
-
-  <!-- 🔥 VIGNETTE -->
-  <script>
-    (function(s){
-      s.dataset.zone='10820301';
-      s.src='https://n6wxm.com/vignette.min.js';
-    })(document.body.appendChild(document.createElement('script')));
-  </script>
+  <!-- IMA SDK (for VAST ads) -->
+  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ima@1.10.0/dist/videojs.ima.min.js"></script>
 
 </head>
 
 <body>
 
-  <!-- TOP BANNER (REPLACE LATER WITH MONETAG BANNER) -->
-  <div class="banner" id="topBanner"></div>
+  <!-- TOP BANNER -->
+  <div class="banner" id="topBanner">
+    <!-- 👉 PLACE EXOCLICK TOP BANNER HERE -->
+  </div>
 
   <div class="main-layout">
 
     <!-- LEFT BANNER -->
-    <div class="banner-left" id="leftBanner"></div>
+    <div class="banner-left" id="leftBanner">
+      <!-- 👉 PLACE EXOCLICK SIDE BANNER HERE -->
+    </div>
 
     <!-- MAIN -->
     <div class="container">
+
       <h2>Watch Ad to Continue</h2>
 
-      <!-- CENTER -->
-      <div id="ad-container">
-        <!-- optional direct link booster -->
-        <a href="https://omg10.com/4/10820300" target="_blank" id="directLink" style="display:none;"></a>
+      <!-- 🎥 VIDEO PLAYER (MAIN MONEY) -->
+      <div id="videoContainer">
+        <video
+          id="videoPlayer"
+          class="video-js vjs-default-skin"
+          controls
+          autoplay
+          muted
+          playsinline
+          width="640"
+          height="360"
+        ></video>
       </div>
 
       <!-- TIMER -->
@@ -62,11 +55,40 @@
         <p id="status">Loading ad...</p>
         <button id="closeBtn" style="display:none;">Close Ad</button>
       </div>
+
     </div>
   </div>
 
   <!-- BOTTOM BANNER -->
-  <div class="banner" id="bottomBanner"></div>
+  <div class="banner" id="bottomBanner">
+    <!-- 👉 PLACE EXOCLICK BOTTOM BANNER HERE -->
+  </div>
+
+  <!-- VIDEO INIT (EMPTY FOR NOW) -->
+  <script>
+    const player = videojs('videoPlayer');
+
+    // 👉 YOU WILL ADD EXOCLICK VAST HERE LATER
+    /*
+    player.ima({
+      adTagUrl: "YOUR_EXOCLICK_VAST_URL"
+    });
+
+    player.ready(() => {
+      player.ima.initializeAdDisplayContainer();
+      player.ima.requestAds();
+      player.play();
+    });
+
+    player.on('adend', () => {
+      window.postMessage({ type: "VIDEO_DONE" }, "*");
+    });
+
+    player.on('adserror', () => {
+      window.postMessage({ type: "VIDEO_DONE" }, "*");
+    });
+    */
+  </script>
 
   <script src="script.js"></script>
 
