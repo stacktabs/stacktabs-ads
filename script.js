@@ -3,10 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(location.search);
   const token = params.get("token");
 
-  if (!token) {
-    console.warn("No token (dev mode)");
-  }
-
   const status = document.getElementById("status");
   const closeBtn = document.getElementById("closeBtn");
   const timerDisplay = document.getElementById("timerDisplay");
@@ -14,33 +10,63 @@ document.addEventListener("DOMContentLoaded", () => {
   let remainingSeconds = 5;
   let timer = null;
   let completed = false;
+  let adOpened = false;
 
   closeBtn.style.display = "none";
-  status.textContent = "Please wait 5 seconds...";
+  status.textContent = "Opening ad...";
 
+  // 🔥 STEP 1: FORCE POP AD
+  setTimeout(() => {
+    document.body.click(); // triggers monetag pop
+    adOpened = true;
+  }, 1000);
+
+  // 🔥 STEP 2: WAIT UNTIL USER RETURNS
+  window.addEventListener("focus", () => {
+    if (adOpened && !timer && !completed) {
+      startTimer();
+    }
+  });
+
+  // 🔥 TIMER FUNCTION
   function startTimer() {
-    if (timer || completed) return;
+    status.textContent = "Please wait 5 seconds...";
 
     timer = setInterval(() => {
-      remainingSeconds--;
 
-      status.textContent = `Please watch ${remainingSeconds}s`;
-      timerDisplay.textContent = `${remainingSeconds}s`;
+      remainingSeconds--;
+      timerDisplay.textContent = remainingSeconds + "s";
 
       if (remainingSeconds <= 0) {
         completeAd();
       }
+
     }, 1000);
   }
-  
-  function completeAd() {
-    if (completed) return;
 
+  function stopTimer() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  // 🔥 PAUSE IF USER LEAVES TAB
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopTimer();
+    } else {
+      if (!completed && adOpened) {
+        startTimer();
+      }
+    }
+  });
+
+  function completeAd() {
     completed = true;
-    clearInterval(timer);
+    stopTimer();
 
     status.textContent = "Ad completed. You may close this page.";
-    status.classList.add("completed");
     timerDisplay.textContent = "✔";
 
     closeBtn.style.display = "block";
@@ -52,14 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }, "*");
   }
 
-  // 🔥 START TIMER ONLY AFTER VIDEO
-  window.addEventListener("message", (event) => {
-    if (event.data?.type === "VIDEO_DONE") {
-      startTimer();
-    }
-  });
-
   closeBtn.onclick = () => {
+
     if (window.opener) {
       window.opener.postMessage({
         source: "stacktabs-ad",
