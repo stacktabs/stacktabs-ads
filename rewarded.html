@@ -1,130 +1,73 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Watch Ad to Continue</title>
+
   <link rel="stylesheet" href="style.css" />
   <meta name="monetag" content="c2c42704f765b26fe257363522ac4c9d">
-  <!-- 🔥 SOCIAL BAR (loads globally) -->
-  <script src="https://pl28972653.profitablecpmratenetwork.com/51/9d/df/519ddfa48ea484584ff52caa04d9c27f.js"></script>
-  <link href="https://vjs.zencdn.net/7.21.1/video-js.css" rel="stylesheet" />
-  <script src="https://vjs.zencdn.net/7.21.1/video.min.js"></script>
-  
+
+  <!-- 🔥 MULTI TAG (AUTO: pop + push + inpage) -->
+  <script src="https://quge5.com/88/tag.min.js" data-zone="225721" async data-cfasync="false"></script>
+
+  <!-- 🔥 EXTRA POPUNDER (STRONG MONEY) -->
+  <script>
+    (function(s){
+      s.dataset.zone='10820296';
+      s.src='https://al5sm.com/tag.min.js';
+    })(document.body.appendChild(document.createElement('script')));
+  </script>
+
+  <!-- 🔥 INPAGE PUSH -->
+  <script>
+    (function(s){
+      s.dataset.zone='10820298';
+      s.src='https://nap5k.com/tag.min.js';
+    })(document.body.appendChild(document.createElement('script')));
+  </script>
+
+  <!-- 🔥 VIGNETTE -->
+  <script>
+    (function(s){
+      s.dataset.zone='10820301';
+      s.src='https://n6wxm.com/vignette.min.js';
+    })(document.body.appendChild(document.createElement('script')));
+  </script>
+
 </head>
 
 <body>
-  <div id="videoOverlay" class="video-overlay">
-    <video
-      id="vastVideo"
-      class="video-js vjs-default-skin"
-      autoplay
-      muted
-      playsinline
-    ></video>
-  </div>
-  <!-- TOP BANNER -->
-  <div class="banner">
-    <script>
-      atOptions = {
-        'key': 'f76cfd09f73da76d142d20679a03bd00',
-        'format': 'iframe',
-        'height': 60,
-        'width': 468,
-        'params': {}
-      };
-    </script>
-    <script src="https://www.highperformanceformat.com/f76cfd09f73da76d142d20679a03bd00/invoke.js"></script>
-  </div>
+
+  <!-- TOP BANNER (REPLACE LATER WITH MONETAG BANNER) -->
+  <div class="banner" id="topBanner"></div>
 
   <div class="main-layout">
 
     <!-- LEFT BANNER -->
-    <div class="banner-left">
-      <script>
-        atOptions = {
-          'key': '7515bdf193a6e512b564e86a8c8a16f5',
-          'format': 'iframe',
-          'height': 600,
-          'width': 160,
-          'params': {}
-        };
-      </script>
-      <script src="https://www.highperformanceformat.com/7515bdf193a6e512b564e86a8c8a16f5/invoke.js"></script>
-    </div>
+    <div class="banner-left" id="leftBanner"></div>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
     <div class="container">
-      <h2>Watch a short ad to continue</h2>
+      <h2>Watch Ad to Continue</h2>
 
-      <!-- 🎯 CENTER (NATIVE BANNER) -->
+      <!-- CENTER -->
       <div id="ad-container">
-        <div id="container-a9904dbe1fd45dcf39bde5cf838c466e"></div>
-        <script async data-cfasync="false"
-          src="https://pl28972628.profitablecpmratenetwork.com/a9904dbe1fd45dcf39bde5cf838c466e/invoke.js">
-        </script>
+        <!-- optional direct link booster -->
+        <a href="https://omg10.com/4/10820300" target="_blank" id="directLink" style="display:none;"></a>
       </div>
 
-      <!-- TIMER BOX -->
+      <!-- TIMER -->
       <div class="reward-box">
         <div id="timerDisplay">5s</div>
-        <p id="status">Watch 5 seconds to unlock</p>
+        <p id="status">Loading ad...</p>
         <button id="closeBtn" style="display:none;">Close Ad</button>
       </div>
     </div>
   </div>
 
   <!-- BOTTOM BANNER -->
-  <div class="banner">
-    <script>
-      atOptions = {
-        'key': '527fdf600a94c070dfa93cd90572fc4d',
-        'format': 'iframe',
-        'height': 90,
-        'width': 728,
-        'params': {}
-      };
-    </script>
-    <script src="https://www.highperformanceformat.com/527fdf600a94c070dfa93cd90572fc4d/invoke.js"></script>
-  </div>
+  <div class="banner" id="bottomBanner"></div>
 
-  
-  <script>
-    const video = document.getElementById("vastVideo");
-  
-    // 🔥 YOUR VAST URL
-    const vastUrl = "https://serving.stat-rock.com/v1/placements/pL5GCw_gpRn6/code/vpaid/1?w=420&h=250&url=https://stacktabs.github.io/stacktabs-ads/rewarded.html&cb=123456";
-  
-    // fetch VAST XML
-    fetch(vastUrl)
-      .then(res => res.text())
-      .then(xml => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xml, "text/xml");
-  
-        // extract video file
-        const mediaFile = xmlDoc.querySelector("MediaFile");
-  
-        if (!mediaFile) throw new Error("No ad fill");
-  
-        const videoUrl = mediaFile.textContent;
-  
-        video.src = videoUrl;
-        video.play();
-      })
-      .catch(err => {
-        console.warn("Ad failed:", err);
-  
-        // fallback → start timer
-        document.getElementById("videoOverlay").style.display = "none";
-        window.postMessage({ type: "VIDEO_DONE" }, "*");
-      });
-  
-    // when video ends
-    video.addEventListener("ended", () => {
-      document.getElementById("videoOverlay").style.display = "none";
-      window.postMessage({ type: "VIDEO_DONE" }, "*");
-    });
-  </script>
   <script src="script.js"></script>
 
 </body>
