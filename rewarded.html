@@ -6,36 +6,39 @@
 
   <link rel="stylesheet" href="style.css" />
 
-  <!-- VIDEO.JS -->
+  <!-- VIDEO PLAYER -->
   <link href="https://vjs.zencdn.net/7.21.1/video-js.css" rel="stylesheet" />
   <script src="https://vjs.zencdn.net/7.21.1/video.min.js"></script>
 
-  <!-- IMA SDK (for VAST ads) -->
+  <!-- IMA SDK (for VAST) -->
   <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/videojs-ima@1.10.0/dist/videojs.ima.min.js"></script>
-
 </head>
 
 <body>
 
-  <!-- TOP BANNER -->
+  <!-- 🔹 TOP BANNER -->
   <div class="banner" id="topBanner">
-    <!-- 👉 PLACE EXOCLICK TOP BANNER HERE -->
+    <!-- 👉 EXOCLICK TOP BANNER HERE -->
   </div>
 
   <div class="main-layout">
 
-    <!-- LEFT BANNER -->
+    <!-- 🔹 LEFT BANNER -->
     <div class="banner-left" id="leftBanner">
-      <!-- 👉 PLACE EXOCLICK SIDE BANNER HERE -->
+      <!-- 👉 EXOCLICK SIDE BANNER HERE -->
     </div>
 
-    <!-- MAIN -->
+    <!-- 🔹 MAIN CONTENT -->
     <div class="container">
 
-      <h2>Watch Ad to Continue</h2>
+      <!-- ✅ SMALL CONTENT (FOR APPROVAL) -->
+      <div class="info-box">
+        <h3>Unlock Feature</h3>
+        <p>Watch a short ad to continue using StackTabs.</p>
+      </div>
 
-      <!-- 🎥 VIDEO PLAYER (MAIN MONEY) -->
+      <!-- 🎥 VIDEO AD -->
       <div id="videoContainer">
         <video
           id="videoPlayer"
@@ -44,12 +47,12 @@
           autoplay
           muted
           playsinline
-          width="640"
-          height="360"
+          width="480"
+          height="270"
         ></video>
       </div>
 
-      <!-- TIMER -->
+      <!-- ⏱ TIMER -->
       <div class="reward-box">
         <div id="timerDisplay">5s</div>
         <p id="status">Loading ad...</p>
@@ -59,19 +62,20 @@
     </div>
   </div>
 
-  <!-- BOTTOM BANNER -->
+  <!-- 🔹 BOTTOM BANNER -->
   <div class="banner" id="bottomBanner">
-    <!-- 👉 PLACE EXOCLICK BOTTOM BANNER HERE -->
+    <!-- 👉 EXOCLICK BOTTOM BANNER HERE -->
   </div>
 
-  <!-- VIDEO INIT (EMPTY FOR NOW) -->
+  <!-- 🎯 VIDEO INIT -->
   <script>
     const player = videojs('videoPlayer');
 
-    // 👉 YOU WILL ADD EXOCLICK VAST HERE LATER
-    /*
+    // 🔥 REPLACE WITH EXOCLICK VAST
+    const vastTag = "YOUR_EXOCLICK_VAST_URL";
+
     player.ima({
-      adTagUrl: "YOUR_EXOCLICK_VAST_URL"
+      adTagUrl: vastTag
     });
 
     player.ready(() => {
@@ -80,14 +84,24 @@
       player.play();
     });
 
+    // ✅ when ad finishes
     player.on('adend', () => {
       window.postMessage({ type: "VIDEO_DONE" }, "*");
     });
 
+    // ✅ fallback (no fill)
     player.on('adserror', () => {
       window.postMessage({ type: "VIDEO_DONE" }, "*");
     });
-    */
+
+    // ⛔ pause when tab inactive
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        player.pause();
+      } else {
+        player.play();
+      }
+    });
   </script>
 
   <script src="script.js"></script>
